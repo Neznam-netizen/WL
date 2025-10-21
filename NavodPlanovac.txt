@@ -1,0 +1,8 @@
+PS1 a vbs v dokumentech
+
+wscript.exe
+
+
+Do pole Přidat argumenty vložte celou cestu VBS skriptu, např.:
+
+"C:\Users\ucet!!!!!!!\Documents\RunWallpaper.vbs"

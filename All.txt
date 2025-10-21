@@ -1,0 +1,53 @@
+PS1 a vbs v dokumentech
+
+wscript.exe
+
+
+Do pole Přidat argumenty vložte celou cestu VBS skriptu, např.:
+
+"C:\Users\ucet!!!!!!!\Documents\RunWallpaper.vbs"
+
+
+
+RunWallpaper.vbs
+
+Set objShell = CreateObject("Wscript.Shell")
+objShell.Run "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File ""C:\Users\ucet!!!!!\Documents\SetWallpaper.ps1""", 0, True
+
+
+
+SetWallpaper.ps1
+
+# Cesta do Dokumentů
+$docFolder = [Environment]::GetFolderPath("MyDocuments")
+$path = Join-Path -Path $docFolder -ChildPath "tapeta.jpg"
+
+# URL obrázku
+$url = "http://sapsec.wz.cz/r1.jpg"
+
+# Ujisti se že složka existuje
+if (-not (Test-Path $docFolder)) {
+    New-Item -ItemType Directory -Path $docFolder | Out-Null
+}
+
+try {
+    # Stáhnout obrázek (přepíše starý)
+    Invoke-WebRequest -Uri $url -OutFile $path -UseBasicParsing -ErrorAction Stop
+
+    # Nastavit tapetu přes SystemParametersInfo (spolehlivější než registr)
+    Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public class Wallpaper {
+  [DllImport("user32.dll", CharSet = CharSet.Auto)]
+  public static extern int SystemParametersInfo (int uAction, int uParam, string lpvParam, int fuWinIni);
+}
+"@
+
+    # SPI_SETDESKWALLPAPER = 20, SPIF_UPDATEINIFILE = 0x01, SPIF_SENDCHANGE = 0x02
+    [Wallpaper]::SystemParametersInfo(20, 0, $path, 0x01 -bor 0x02)
+
+}
+catch {
+    # Write-Output "Nepodařilo se stáhnout nebo nastavit tapetu: $_"
+}
