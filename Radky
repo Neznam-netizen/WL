@@ -1,0 +1,13 @@
+javascript:(function(){
+  var css = ".trida-otravneho-radku{display:none!important;}";
+  var s = document.getElementById("myCustomHideCSS");
+  if(!s){
+    s = document.createElement("style");
+    s.id = "myCustomHideCSS";
+    s.type = "text/css";
+    s.appendChild(document.createTextNode(css));
+    document.head.appendChild(s);
+  } else {
+    s.textContent = css;
+  }
+})();
