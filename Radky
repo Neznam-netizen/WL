@@ -1,4 +1,4 @@
-(function () {
+javascript:(function () {
   var btn = document.getElementById('btnOk');
   if (!btn) { alert('btnOk nenalezen'); return; }
 
