@@ -1,9 +1,10 @@
 javascript:(function(){
-  var el = document.querySelector('#btnOk')?.closest('.form-group') 
-         || document.querySelector('#btnNotOk')?.closest('.form-group');
-  if (el){
-    el.style.display = 'none';
-  } else {
-    alert('Form-group s tlačítky OK/NotOk se nenašel.');
+  var css = ".form-group:has(#btnOk){display:none!important;}";
+  var s = document.getElementById("hideFormGroupCSS");
+  if(!s){
+      s=document.createElement("style");
+      s.id="hideFormGroupCSS";
+      s.appendChild(document.createTextNode(css));
+      document.head.appendChild(s);
   }
 })();
