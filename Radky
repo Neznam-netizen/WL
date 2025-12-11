@@ -1,10 +1,12 @@
-javascript:(function(){
-  var css = ".form-group:has(#btnOk){display:none!important;}";
-  var s = document.getElementById("hideFormGroupCSS");
-  if(!s){
-      s=document.createElement("style");
-      s.id="hideFormGroupCSS";
-      s.appendChild(document.createTextNode(css));
-      document.head.appendChild(s);
+(function () {
+  var btn = document.getElementById('btnOk');
+  if (!btn) { alert('btnOk nenalezen'); return; }
+
+  var p = btn;
+  while (p && (!p.className || p.className.indexOf('form-group') === -1)) {
+    p = p.parentNode;
+  }
+  if (p) {
+    p.style.display = 'none';
   }
 })();
