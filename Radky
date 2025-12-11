@@ -1,13 +1,9 @@
 javascript:(function(){
-  var css = ".trida-otravneho-radku{display:none!important;}";
-  var s = document.getElementById("myCustomHideCSS");
-  if(!s){
-    s = document.createElement("style");
-    s.id = "myCustomHideCSS";
-    s.type = "text/css";
-    s.appendChild(document.createTextNode(css));
-    document.head.appendChild(s);
+  var el = document.querySelector('#btnOk')?.closest('.form-group') 
+         || document.querySelector('#btnNotOk')?.closest('.form-group');
+  if (el){
+    el.style.display = 'none';
   } else {
-    s.textContent = css;
+    alert('Form-group s tlačítky OK/NotOk se nenašel.');
   }
 })();
