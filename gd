@@ -6,7 +6,7 @@
   "description": "Skryje konkrétní prvek u MCAT po načtení stránky.",
   "content_scripts": [
     {
-      "matches": ["http://ottm15c06pc02/*", "http://ottm15c06pc02"],
+      "matches": ["http://ottm15c06pc02/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
     }
